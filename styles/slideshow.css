@@ -52,6 +52,28 @@ body {
     z-index: 1;
 }
 
+/* Enhanced Container Wrapper */
+.slideshow-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+/* Ensure slide inner content is perfectly centered vertically */
+.slide-inner {
+    width: 100%;
+    max-width: 1400px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
 /* Background Effects */
 .bg-effects {
     position: absolute;
@@ -175,6 +197,9 @@ body {
     width: 100%;
     height: 100%;
     z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Simplified Smooth Slide Transitions - Made Faster */
@@ -189,6 +214,9 @@ body {
     transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
     pointer-events: none;
     will-change: transform, opacity;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .slide.active {
@@ -333,6 +361,7 @@ body {
         transparent 100%);
     border-radius: 20px;
     backdrop-filter: blur(10px);
+    align-self: center;
 }
 
 /* Enhanced Progress Bar */

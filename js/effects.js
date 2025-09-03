@@ -1,6 +1,8 @@
 // Matrix rain effect
 export function createMatrixRain() {
     const matrixContainer = document.querySelector('.matrix-rain');
+    // Abort if no container is present on the page to avoid runtime errors
+    if (!matrixContainer) return;
     const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
     
     // Create fewer columns for performance
@@ -1119,11 +1121,14 @@ export function createShootingGallery() {
 
 // Initialize all effects
 export function initializeEffects() {
+    // Core visual systems
     createMatrixRain();
     createAdvancedParticles();
     createCursorTrail();
     createNeuralNetwork();
     createShaderBackground();
+
+    // Advanced / interactive systems
     createTextMorphing();
     createCyberScan();
     createDigitalGrid();
