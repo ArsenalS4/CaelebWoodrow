@@ -46,35 +46,36 @@ export function createAdvancedParticles() {
     particleContainer.className = 'particle-system';
     document.body.appendChild(particleContainer);
 
-    for (let i = 0; i < 40; i++) {
-        setTimeout(() => createFloatingParticle(particleContainer), Math.random() * 10000);
+    // More frequent and slightly larger particles for visibility
+    for (let i = 0; i < 80; i++) {
+        setTimeout(() => createFloatingParticle(particleContainer), Math.random() * 6000);
     }
 
     setInterval(() => {
-        if (particleContainer.children.length < 30) createFloatingParticle(particleContainer);
-    }, 2000);
+        if (particleContainer.children.length < 60) createFloatingParticle(particleContainer);
+    }, 1200);
 }
 
 function createFloatingParticle(container) {
     const particle = document.createElement('div');
     particle.className = 'floating-particle';
-    const size = Math.random() * 4 + 1;
-    const duration = Math.random() * 20 + 15;
-    const delay = Math.random() * 5;
+    const size = Math.random() * 6 + 2; // slightly larger
+    const duration = Math.random() * 18 + 8;
+    const delay = Math.random() * 3;
 
     particle.style.cssText = `
         position: fixed;
         width: ${size}px;
         height: ${size}px;
-        background: radial-gradient(circle, var(--primary-color), transparent);
+        background: radial-gradient(circle, rgba(37,99,235,0.95), rgba(59,130,246,0.6));
         border-radius: 50%;
         left: ${Math.random() * window.innerWidth}px;
-        top: ${window.innerHeight + 50}px;
+        top: ${window.innerHeight + 60}px;
         pointer-events: none;
         z-index: 1;
         animation: floatUp ${duration}s linear ${delay}s forwards;
-        opacity: ${Math.random() * 0.8 + 0.2};
-        box-shadow: 0 0 ${size * 2}px var(--primary-color);
+        opacity: ${Math.random() * 0.9 + 0.35};
+        box-shadow: 0 0 ${size * 4}px rgba(37,99,235,0.9);
     `;
     container.appendChild(particle);
     setTimeout(() => { if (particle.parentNode) particle.parentNode.removeChild(particle); }, (duration + delay) * 1000);

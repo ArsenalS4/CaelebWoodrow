@@ -30,7 +30,7 @@
 
 .hero-title {
     font-family: 'Orbitron', monospace;
-    font-size: 4rem;
+    font-size: 7.2rem; /* much larger heading */
     font-weight: 900;
     margin-bottom: 2rem;
     text-transform: uppercase;
@@ -60,11 +60,18 @@
 }
 
 .hero-subtitle {
-    font-size: 1.2rem;
+    font-size: 2.2rem; /* larger subtitle */
     color: var(--text-secondary);
-    margin-bottom: 3rem;
+    margin-bottom: 2.2rem;
     opacity: 0;
     animation: fadeIn 1s ease forwards 0.8s;
+}
+
+.hero-description {
+    font-size: 1.4rem; /* larger lead paragraph */
+    max-width: 50rem;
+    margin: 0 auto 2rem;
+    color: var(--text-secondary);
 }
 
 .hero-logo {
@@ -428,4 +435,18 @@
     color: var(--primary-color);
     border-color: var(--primary-color);
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 4.2rem; /* adjusted mobile scaling */
+    }
+
+    .hero-subtitle {
+        font-size: 1.6rem;
+    }
+
+    .hero-description {
+        font-size: 1.1rem;
+    }
 }

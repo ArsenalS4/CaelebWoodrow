@@ -101,55 +101,6 @@ function createFloatingParticle(container) {
     }, (duration + delay) * 1000);
 }
 
-// Interactive Cursor Trail
-export function createCursorTrail() {
-    const trailContainer = document.createElement('div');
-    trailContainer.className = 'cursor-trail';
-    document.body.appendChild(trailContainer);
-    
-    let mouseX = 0, mouseY = 0;
-    let trails = [];
-    
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        
-        // Create trail particle
-        const trail = document.createElement('div');
-        trail.className = 'trail-particle';
-        trail.style.cssText = `
-            position: fixed;
-            left: ${mouseX - 2}px;
-            top: ${mouseY - 2}px;
-            width: 4px;
-            height: 4px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            box-shadow: 0 0 10px var(--primary-color);
-            animation: trailFade 1s ease-out forwards;
-        `;
-        
-        trailContainer.appendChild(trail);
-        trails.push(trail);
-        
-        // Limit trail particles
-        if (trails.length > 20) {
-            const oldTrail = trails.shift();
-            if (oldTrail.parentNode) {
-                oldTrail.parentNode.removeChild(oldTrail);
-            }
-        }
-        
-        setTimeout(() => {
-            if (trail.parentNode) {
-                trail.parentNode.removeChild(trail);
-            }
-        }, 1000);
-    });
-}
-
 // Neural Network Visualization
 export function createNeuralNetwork() {
     const networkContainer = document.createElement('div');
@@ -1124,7 +1075,6 @@ export function initializeEffects() {
     // Core visual systems
     createMatrixRain();
     createAdvancedParticles();
-    createCursorTrail();
     createNeuralNetwork();
     createShaderBackground();
 
