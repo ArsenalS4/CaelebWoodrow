@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arsenal Studios - Case Studies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/slideshow.css">
+    
+    <!-- Arsenal Studios specific styling -->
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #a855f7;
+            --bg-dark: #0a0a0a;
+            --bg-darker: #050505;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-muted: #666666;
+            --border-color: #333333;
+        }
+        
+        body {
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Space Mono', monospace;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-wrapper">
+        <!-- Background Effects -->
+        <div class="bg-effects">
+            <div class="matrix-rain"></div>
+            <div class="digital-grid"></div>
+        </div>
+
+        <!-- Navigation (hidden by default, shows on hover) -->
+        <nav class="navigation">
+            <div class="nav-content">
+                <div class="logo-section">
+                    <img src="/LogoG.png" alt="Arsenal Studios" class="logo-img">
+                    <span class="logo-text">ARSENAL STUDIOS</span>
+                </div>
+                <div class="nav-controls">
+                    <button class="nav-btn" id="prevBtn">← PREV</button>
+                    <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">14</span></span>
+                    <button class="nav-btn" id="nextBtn">NEXT →</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Workspace Slides -->
+            <section class="slide active" data-section="workspace">
+                <div class="slide-inner">
+                    <header class="slide-header">
+                        <h1 class="slide-title">WORKING SPACE</h1>
+                        <h2 class="slide-subtitle">PROFESSIONAL DEVELOPMENT OFFICE</h2>
+                        <span class="section-tag">WORKSPACE</span>
+                    </header>
+                    <div class="slide-content">
+                        <div class="image-container">
+                            <img src="/development.jpg" alt="Professional development office">
+                        </div>
+                        <div class="details-container">
+                            <div class="detail-block">
+                                <h3>CONCEPT OVERVIEW</h3>
+                                <p>Modern professional development workspace featuring ergonomic workstations, collaborative areas, and advanced technology infrastructure for optimal productivity.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h3>KEY FEATURES</h3>
+                                <ul class="feature-list">
+                                    <li>Open-plan collaborative spaces</li>
+                                    <li>Ergonomic workstation design</li>
+                                    <li>Natural lighting optimization</li>
+                                    <li>Technology integration</li>
+                                    <li>Flexible meeting areas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide" data-section="workspace">
+                <div class="slide-inner">
+                    <header class="slide-header">
+                        <h1 class="slide-title">WORKING SPACE</h1>
+                        <h2 class="slide-subtitle">MOTION CAPTURE STUDIO</h2>
+                        <span class="section-tag">WORKSPACE</span>
+                    </header>
+                    <div class="slide-content">
+                        <div class="image-container">
+                            <img src="/mocap.jpg" alt="Motion capture studio">
+                        </div>
+                        <div class="details-container">
+                            <div class="detail-block">
+                                <h3>CONCEPT OVERVIEW</h3>
+                                <p>State-of-the-art motion capture studio designed for professional content creation with advanced tracking technology and controlled environment.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h3>KEY FEATURES</h3>
+                                <ul class="feature-list">
+                                    <li>Professional motion tracking systems</li>
+                                    <li>Controlled lighting environment</li>
+                                    <li>High-performance capture equipment</li>
+                                    <li>Real-time processing capabilities</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide" data-section="workspace">
+                <div class="slide-inner">
+                    <header class="slide-header">
+                        <h1 class="slide-title">WORKING SPACE</h1>
+                        <h2 class="slide-subtitle">AGILE TEAM MEETING SPACE</h2>
+                        <span class="section-tag">WORKSPACE</span>
+                    </header>
+                    <div class="slide-content">
+                        <div class="image-container">
+                            <img src="/preproduction.png" alt="Agile team meeting">
+                        </div>
+                        <div class="details-container">
+                            <div class="detail-block">
+                                <h3>CONCEPT OVERVIEW</h3>
+                                <p>Dynamic team collaboration space optimized for agile development methodologies and creative brainstorming sessions.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h3>KEY FEATURES</h3>
+                                <ul class="feature-list">
+                                    <li>Flexible seating arrangements</li>
+                                    <li>Interactive presentation systems</li>
+                                    <li>Collaborative whiteboard spaces</li>
+                                    <li>Agile workflow integration</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gallery Slides -->
+            <section class="slide" data-section="gallery">
+                <div class="slide-inner">
+                    <header class="slide-header">
+                        <h1 class="slide-title">PUBLIC GALLERY</h1>
+                        <h2 class="slide-subtitle">MODERN GALLERY INTERIOR</h2>
+                        <span class="section-tag">GALLERY</span>
+                    </header>
+                    <div class="slide-content">
+                        <div class="image-container">
+                            <img src="/gallerylayout.jpg" alt="Modern gallery interior">
+                        </div>
+                        <div class="details-container">
+                            <div class="detail-block">
+                                <h3>CONCEPT OVERVIEW</h3>
+                                <p>Contemporary gallery space with flexible exhibition areas, optimal lighting, and visitor circulation flow.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h3>KEY FEATURES</h3>
+                                <ul class="feature-list">
+                                    <li>Flexible exhibition spaces</li>
+                                    <li>Professional gallery lighting</li>
+                                    <li>Optimized visitor flow</li>
+                                    <li>Interactive display areas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide" data-section="gallery">
+                <div class="slide-inner">
+                    <header class="slide-header">
+                        <h1 class="slide-title">PUBLIC GALLERY</h1>
+                        <h2 class="slide-subtitle">GAME EXHIBITION SPACE</h2>
+                        <span class="section-tag">GALLERY</span>
+                    </header>
+                    <div class="slide-content">
+                        <div class="image-container">
+                            <img src="/gallery%20art.png" alt="Game exhibition space">
+                        </div>
+                        <div class="details-container">
+                            <div class="detail-block">
+                                <h3>CONCEPT OVERVIEW</h3>
+                                <p>Interactive exhibition space showcasing digital art installations and immersive experiences.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h3>KEY FEATURES</h3>
+                                <ul class="feature-list">
+                                    <li>Interactive gaming exhibits</li>
+                                    <li>Digital art installations</li>
+                                    <li>Immersive display technology</li>
+                                    <li>Gaming history showcase</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide" data-section="gallery">
+                <div class="slide-inner">
+                    <header class="slide-header">
+                        <h1 class="slide-title">PUBLIC GALLERY</h1>
+                        <h2 class="slide-subtitle">GAME TESTING DISPLAY</h2>
+                        <span class="section-tag">GALLERY</span>
+                    </header>
+                    <div class="slide-content">
+                        <div class="image-container">
+                            <img src="/gametest.jpg" alt="Game testing display">
+                        </div>
+                        <div class="details-container">
+                            <div class="detail-block">
+                                <h3>CONCEPT OVERVIEW</h3>
+                                <p>Public gaming demonstration area featuring live gameplay sessions and interactive testing environments.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h3>KEY FEATURES</h3>
+                                <ul class="feature-list">
+                                    <li>Live gameplay demonstrations</li>
+                                    <li>Public testing stations</li>
+                                    <li>High-performance gaming displays</li>
+                                    <li>Interactive audience participation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Outdoor Slides -->
+            <section class="slide" data-section="outdoor">
+                <div class="slide-inner">
+                    <header class="slide-header">
+                        <h1 class="slide-title">OUTDOOR AREAS</h1>
+                        <h2 class="slide-subtitle">CAFE & HIGH-SPEED INTERNET</h2>
+                        <span class="section-tag">OUTDOOR</span>
+                    </header>
+                    <div class="slide-content">
+                        <div class="image-container">
+                            <img src="/outdoornet.png" alt="Outdoor cafe with high-speed internet">
+                        </div>
+                        <div class="details-container">
+                            <div class="detail-block">
+                                <h3>CONCEPT OVERVIEW</h3>
+                                <p>Outdoor workspace and cafe area with high-speed internet connectivity for remote work and casual activities.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h3>KEY FEATURES</h3>
+                                <ul class="feature-list">
+                                    <li>High-speed wireless connectivity</li>
+                                    <li>Weather-resistant seating</li>
+                                    <li>Integrated power outlets</li>
+                                    <li>Cafe service integration</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide" data-section="outdoor">
+                <div class="slide-inner">
+                    <header class="slide-header">
+                        <h1 class="slide-title">OUTDOOR AREAS</h1>
+                        <h2 class="slide-subtitle">PATIO FIREPLACE LOUNGE</h2>
+                        <span class="section-tag">OUTDOOR</span>
+                    </header>
+                    <div class="slide-content">
+                        <div class="image-container">
+                            <img src="/outdoorcamfire.png" alt="Outdoor patio fireplace">
+                        </div>
+                        <div class="details-container">
+                            <div class="detail-block">
+                                <h3>CONCEPT OVERVIEW</h3>
+                                <p>Comfortable outdoor lounge area centered around a modern fireplace for evening gatherings and team building.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h3>KEY FEATURES</h3>
+                                <ul class="feature-list">
+                                    <li>Central fireplace feature</li>
+                                    <li>Comfortable seating arrangements</li>
+                                    <li>Evening lighting design</li>
+                                    <li>Social gathering optimization</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide" data-section="outdoor">
+                <div class="slide-inner">
+                    <header class="slide-header">
+                        <h1 class="slide-title">OUTDOOR AREAS</h1>
+                        <h2 class="slide-subtitle">RISTRETTO LAB CAFE</h2>
+                        <span class="section-tag">OUTDOOR</span>
+                    </header>
+                    <div class="slide-content">
+                        <div class="image-container">
+                            <img src="/outdoor.jpg" alt="Ristretto lab cafe">
+                        </div>
+                        <div class="details-container">
+                            <div class="detail-block">
+                                <h3>CONCEPT OVERVIEW</h3>
+                                <p>Specialty coffee laboratory and tasting area designed for creative inspiration and casual meetings.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h3>KEY FEATURES</h3>
+                                <ul class="feature-list">
+                                    <li>Specialty coffee preparation</li>
+                                    <li>Tasting and experimentation area</li>
+                                    <li>Creative inspiration space</li>
+                                    <li>Casual meeting environment</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Living Quarters -->
+            <section class="slide" data-section="living">
+                <div class="slide-inner">
+                    <header class="slide-header">
+                        <h1 class="slide-title">LIVING QUARTERS</h1>
+                        <h2 class="slide-subtitle">BEDROOM DESIGN</h2>
+                        <span class="section-tag">LIVING</span>
+                    </header>
+                    <div class="slide-content">
+                        <div class="image-container">
+                            <img src="/gamingbedroom.jpg" alt="Bedroom design">
+                        </div>
+                        <div class="details-container">
+                            <div class="detail-block">
+                                <h3>CONCEPT OVERVIEW</h3>
+                                <p>Personal bedroom with integrated entertainment systems and comfortable relaxation areas.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h3>KEY FEATURES</h3>
+                                <ul class="feature-list">
+                                    <li>Integrated entertainment setup</li>
+                                    <li>Comfortable relaxation areas</li>
+                                    <li>Ambient lighting design</li>
+                                    <li>Personal entertainment space</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide" data-section="living">
+                <div class="slide-inner">
+                    <header class="slide-header">
+                        <h1 class="slide-title">LIVING QUARTERS</h1>
+                        <h2 class="slide-subtitle">KITCHEN DESIGN</h2>
+                        <span class="section-tag">LIVING</span>
+                    </header>
+                    <div class="slide-content">
+                        <div class="image-container">
+                            <img src="/gamingkitchen.jpg" alt="Kitchen design">
+                        </div>
+                        <div class="details-container">
+                            <div class="detail-block">
+                                <h3>CONCEPT OVERVIEW</h3>
+                                <p>Modern kitchen space designed for convenience and functionality with sleek appliances and organized storage.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h3>KEY FEATURES</h3>
+                                <ul class="feature-list">
+                                    <li>Modern appliance integration</li>
+                                    <li>Efficient storage solutions</li>
+                                    <li>Contemporary design elements</li>
+                                    <li>Functional workspace layout</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide" data-section="living">
+                <div class="slide-inner">
+                    <header class="slide-header">
+                        <h1 class="slide-title">LIVING QUARTERS</h1>
+                        <h2 class="slide-subtitle">BATHROOM DESIGN</h2>
+                        <span class="section-tag">LIVING</span>
+                    </header>
+                    <div class="slide-content">
+                        <div class="image-container">
+                            <img src="/gamingbathroom.jpg" alt="Bathroom design">
+                        </div>
+                        <div class="details-container">
+                            <div class="detail-block">
+                                <h3>CONCEPT OVERVIEW</h3>
+                                <p>Modern bathroom space featuring contemporary fixtures, efficient lighting, and a sleek gaming-inspired aesthetic.</p>
+                            </div>
+                            <div class="detail-block">
+                                <h3>KEY FEATURES</h3>
+                                <ul class="feature-list">
+                                    <li>Contemporary fixture design</li>
+                                    <li>Efficient lighting system</li>
+                                    <li>Gaming-inspired aesthetics</li>
+                                    <li>Optimized space utilization</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Side Navigation -->
+        <aside class="side-nav">
+            <button class="section-btn active" data-section="workspace">WORKSPACE</button>
+            <button class="section-btn" data-section="gallery">GALLERY</button>
+            <button class="section-btn" data-section="outdoor">OUTDOOR</button>
+            <button class="section-btn" data-section="living">LIVING</button>
+        </aside>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="contact-info">
+            <p>caelebwoodrow@gmail.com | 803-305-5217 | Columbia, SC</p>
+        </div>
+    </div>
+
+    <script src="js/slideshow.js"></script>
+</body>
+</html>

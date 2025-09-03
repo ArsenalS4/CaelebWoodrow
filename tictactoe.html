@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Tic-Tac-Toe - Arsenal Studios LLC</title>
+    
+    <meta name="description" content="Play multiplayer Cyber Tic-Tac-Toe with a twist - only 3 pieces allowed on the board at once. Real-time multiplayer cyberpunk gaming experience.">
+    <meta name="theme-color" content="#6366f1">
+    
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles/effects.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/LogoGT.png">
+    
+    <style>
+        .tictactoe-container {
+            min-height: 100vh;
+            padding: 2rem;
+            background: var(--bg-darker);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .game-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .game-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 20px var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .game-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .game-mode-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+        
+        .mode-btn {
+            background: transparent;
+            border: 2px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 1rem 2rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        
+        .mode-btn:hover,
+        .mode-btn.active {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: var(--bg-dark);
+            border: 2px solid var(--border-color);
+        }
+        
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .player-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .player-name {
+            font-family: 'Orbitron', monospace;
+            color: var(--primary-color);
+        }
+        
+        .current-turn {
+            font-family: 'Space Mono', monospace;
+            color: var(--accent-color);
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 4px;
+            width: 400px;
+            height: 400px;
+            background: var(--primary-color);
+            padding: 4px;
+            margin-bottom: 2rem;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+        }
+        
+        .game-cell {
+            background: var(--bg-dark);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-cell:hover:not(.occupied) {
+            background: var(--border-color);
+            box-shadow: inset 0 0 20px rgba(99, 102, 241, 0.2);
+        }
+        
+        .game-cell.occupied {
+            cursor: not-allowed;
+        }
+        
+        .game-cell.x {
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+        
+        .game-cell.o {
+            color: var(--secondary-color);
+            text-shadow: 0 0 10px var(--secondary-color);
+        }
+        
+        .game-cell.fadeout {
+            animation: fadeOut 0.5s ease-in-out;
+        }
+        
+        .game-cell.fadein {
+            animation: placeAnimation 0.5s ease-out;
+        }
+        
+        @keyframes fadeOut {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes placeAnimation {
+            0% { transform: scale(0) rotate(180deg); }
+            50% { transform: scale(1.2) rotate(0deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+        
+        .game-status {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .status-text {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+        
+        .game-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .control-btn {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        
+        .control-btn:hover {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+        
+        .ai-controls {
+            background: var(--bg-dark);
+            border: 2px solid var(--border-color);
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            display: none;
+        }
+        
+        .ai-title {
+            font-family: 'Orbitron', monospace;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .difficulty-selector {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .difficulty-btn {
+            background: transparent;
+            border: 2px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.8rem 1.5rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        
+        .difficulty-btn:hover,
+        .difficulty-btn.active {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+        }
+        
+        .players-list {
+            background: var(--bg-dark);
+            border: 2px solid var(--border-color);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .players-title {
+            font-family: 'Orbitron', monospace;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .player-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .player-item.current-player {
+            border-color: var(--accent-color);
+            background: rgba(168, 85, 247, 0.1);
+        }
+        
+        .waiting-message {
+            text-align: center;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin: 2rem 0;
+        }
+        
+        .game-rules {
+            background: var(--bg-dark);
+            border: 2px solid var(--border-color);
+            padding: 1.5rem;
+            max-width: 600px;
+            width: 100%;
+            margin-top: 2rem;
+        }
+        
+        .rules-title {
+            font-family: 'Orbitron', monospace;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .rules-list {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .rules-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .back-link {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .game-board {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .game-cell {
+                font-size: 2rem;
+            }
+            
+            .game-title {
+                font-size: 2rem;
+            }
+            
+            .game-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .game-controls {
+                flex-direction: column;
+            }
+            
+            .control-btn {
+                width: 100%;
+            }
+            
+            .game-mode-selector {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .mode-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glitch-overlay"></div>
+    <div class="matrix-rain"></div>
+    
+    <a href="/" class="back-link">← BACK TO ARSENAL</a>
+    
+    <div class="tictactoe-container">
+        <div class="game-header">
+            <h1 class="game-title glitch" data-text="CYBER TIC-TAC-TOE">CYBER TIC-TAC-TOE</h1>
+            <p class="game-subtitle">Tactical grid combat with the 3-piece rule</p>
+        </div>
+        
+        <div class="game-mode-selector">
+            <button class="mode-btn active" data-mode="ai">VS AI</button>
+            <button class="mode-btn" data-mode="multiplayer">MULTIPLAYER</button>
+        </div>
+        
+        <div class="ai-controls" id="aiControls">
+            <h3 class="ai-title">AI OPPONENT SETTINGS</h3>
+            <div class="difficulty-selector">
+                <button class="difficulty-btn active" data-difficulty="easy">EASY</button>
+                <button class="difficulty-btn" data-difficulty="medium">MEDIUM</button>
+                <button class="difficulty-btn" data-difficulty="hard">HARD</button>
+                <button class="difficulty-btn" data-difficulty="impossible">IMPOSSIBLE</button>
+            </div>
+        </div>
+        
+        <div class="players-list" id="playersList" style="display: none;">
+            <h3 class="players-title">CONNECTED OPERATIVES</h3>
+            <div id="playersContainer">
+                <div class="waiting-message">Connecting to Arsenal Network...</div>
+            </div>
+        </div>
+        
+        <div class="game-info" id="gameInfo">
+            <div class="player-info">
+                <img id="player1Avatar" class="player-avatar" src="" alt="Player 1">
+                <span id="player1Name" class="player-name">Player 1</span>
+                <span class="player-symbol">(X)</span>
+            </div>
+            <div class="current-turn" id="turnIndicator">
+                Click NEW GAME to start
+            </div>
+            <div class="player-info">
+                <img id="player2Avatar" class="player-avatar" src="" alt="Player 2">
+                <span id="player2Name" class="player-name">Player 2</span>
+                <span class="player-symbol">(O)</span>
+            </div>
+        </div>
+        
+        <div class="game-status">
+            <div class="status-text" id="gameStatus">Ready to play - Start a new game</div>
+        </div>
+        
+        <div class="game-board" id="gameBoard">
+            <!-- Game cells will be generated by JavaScript -->
+        </div>
+        
+        <div class="game-controls">
+            <button class="control-btn" id="newGameBtn">NEW GAME</button>
+            <button class="control-btn" id="resetBtn">RESET SCORE</button>
+        </div>
+        
+        <div class="game-rules">
+            <h3 class="rules-title">TACTICAL RULES</h3>
+            <ul class="rules-list">
+                <li>Each player can only have <strong>3 pieces</strong> on the board at once</li>
+                <li>When you place a 4th piece, your <strong>oldest piece disappears</strong></li>
+                <li>First to get 3 in a row (horizontal, vertical, or diagonal) wins</li>
+                <li>Games continue until someone achieves victory</li>
+                <li>In multiplayer mode, moves sync across all connected players</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script type="importmap">
+    {
+      "imports": {
+        "@websim/websim-socket": "https://esm.websim.com/@websim/websim-socket"
+      }
+    }
+    </script>
+    
+    <script type="module">
+        class CyberTicTacToe {
+            constructor() {
+                this.gameMode = 'ai';
+                this.aiDifficulty = 'easy';
+                this.board = Array(9).fill('');
+                this.currentPlayer = 'X';
+                this.gameActive = false;
+                this.playerPieces = { X: [], O: [] };
+                this.score = { X: 0, O: 0, draws: 0 };
+                this.isPlayerTurn = true;
+                this.gameCount = 0;
+                
+                this.init();
+            }
+            
+            init() {
+                this.createBoard();
+                this.setupEventListeners();
+                this.setupAIMode();
+                this.updateDisplay();
+            }
+            
+            createBoard() {
+                const boardElement = document.getElementById('gameBoard');
+                boardElement.innerHTML = '';
+                
+                for (let i = 0; i < 9; i++) {
+                    const cell = document.createElement('button');
+                    cell.className = 'game-cell';
+                    cell.setAttribute('data-index', i);
+                    cell.addEventListener('click', () => this.handleCellClick(i));
+                    boardElement.appendChild(cell);
+                }
+            }
+            
+            setupEventListeners() {
+                // Mode buttons
+                document.querySelectorAll('.mode-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+                        e.target.classList.add('active');
+                        this.gameMode = e.target.dataset.mode;
+                        this.switchGameMode();
+                    });
+                });
+                
+                // Difficulty buttons
+                document.querySelectorAll('.difficulty-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        document.querySelectorAll('.difficulty-btn').forEach(b => b.classList.remove('active'));
+                        e.target.classList.add('active');
+                        this.aiDifficulty = e.target.dataset.difficulty;
+                    });
+                });
+                
+                // Control buttons
+                document.getElementById('newGameBtn').addEventListener('click', () => this.startNewGame());
+                document.getElementById('resetBtn').addEventListener('click', () => this.resetScore());
+            }
+            
+            switchGameMode() {
+                const aiControls = document.getElementById('aiControls');
+                const playersList = document.getElementById('playersList');
+                
+                if (this.gameMode === 'ai') {
+                    aiControls.style.display = 'block';
+                    playersList.style.display = 'none';
+                    this.setupAIMode();
+                } else {
+                    aiControls.style.display = 'none';
+                    playersList.style.display = 'block';
+                    this.setupMultiplayerMode();
+                }
+                
+                this.startNewGame();
+            }
+            
+            setupAIMode() {
+                document.getElementById('player1Avatar').src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"%3E%3Ccircle cx="20" cy="20" r="18" fill="%23333" stroke="%236366f1" stroke-width="2"/%3E%3Ctext x="20" y="26" text-anchor="middle" fill="%236366f1" font-family="monospace" font-size="12"%3EYou%3C/text%3E%3C/svg%3E';
+                document.getElementById('player1Name').textContent = 'Human Player';
+                document.getElementById('player2Avatar').src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"%3E%3Ccircle cx="20" cy="20" r="18" fill="%23333" stroke="%238b5cf6" stroke-width="2"/%3E%3Ctext x="20" y="26" text-anchor="middle" fill="%238b5cf6" font-family="monospace" font-size="16"%3EAI%3C/text%3E%3C/svg%3E';
+                document.getElementById('player2Name').textContent = 'AI Opponent';
+            }
+            
+            setupMultiplayerMode() {
+                document.getElementById('player1Avatar').src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"%3E%3Ccircle cx="20" cy="20" r="18" fill="%23333" stroke="%236366f1" stroke-width="2"/%3E%3Ctext x="20" y="26" text-anchor="middle" fill="%236366f1" font-family="monospace" font-size="12"%3EP1%3C/text%3E%3C/svg%3E';
+                document.getElementById('player1Name').textContent = 'Player 1';
+                document.getElementById('player2Avatar').src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"%3E%3Ccircle cx="20" cy="20" r="18" fill="%23333" stroke="%238b5cf6" stroke-width="2"/%3E%3Ctext x="20" y="26" text-anchor="middle" fill="%238b5cf6" font-family="monospace" font-size="12"%3EP2%3C/text%3E%3C/svg%3E';
+                document.getElementById('player2Name').textContent = 'Player 2';
+            }
+            
+            startNewGame() {
+                this.board = Array(9).fill('');
+                this.currentPlayer = 'X';
+                this.gameActive = true;
+                this.playerPieces = { X: [], O: [] };
+                this.isPlayerTurn = true;
+                this.gameCount++;
+                
+                this.updateBoard();
+                this.updateDisplay();
+                
+                console.log('New game started:', this.gameCount);
+            }
+            
+            handleCellClick(index) {
+                console.log('Cell clicked:', index, 'Game active:', this.gameActive, 'Player turn:', this.isPlayerTurn);
+                
+                if (!this.gameActive) {
+                    console.log('Game not active');
+                    return;
+                }
+                
+                if (this.gameMode === 'ai' && !this.isPlayerTurn) {
+                    console.log('Not player turn in AI mode');
+                    return;
+                }
+                
+                if (this.board[index] !== '') {
+                    console.log('Cell already occupied');
+                    return;
+                }
+                
+                this.makeMove(index);
+            }
+            
+            makeMove(cellIndex) {
+                console.log('Making move:', cellIndex, 'Current player:', this.currentPlayer);
+                
+                // Handle the 3-piece rule
+                const currentPlayerPieces = this.playerPieces[this.currentPlayer];
+                if (currentPlayerPieces.length >= 3) {
+                    const oldestPieceIndex = currentPlayerPieces.shift();
+                    this.board[oldestPieceIndex] = '';
+                    console.log('Removed oldest piece from:', oldestPieceIndex);
+                    
+                    // Add visual feedback for removal
+                    const oldCell = document.querySelector(`[data-index="${oldestPieceIndex}"]`);
+                    if (oldCell) {
+                        oldCell.classList.add('fadeout');
+                        setTimeout(() => oldCell.classList.remove('fadeout'), 500);
+                    }
+                }
+                
+                // Place the new piece
+                this.board[cellIndex] = this.currentPlayer;
+                this.playerPieces[this.currentPlayer].push(cellIndex);
+                console.log('Placed piece at:', cellIndex, 'Player pieces:', this.playerPieces);
+                
+                // Add visual feedback for placement
+                const newCell = document.querySelector(`[data-index="${cellIndex}"]`);
+                if (newCell) {
+                    newCell.classList.add('fadein');
+                    setTimeout(() => newCell.classList.remove('fadein'), 500);
+                }
+                
+                this.updateBoard();
+                
+                // Check for win condition
+                const winner = this.checkWinner();
+                if (winner) {
+                    console.log('Winner found:', winner);
+                    this.endGame(winner);
+                    return;
+                }
+                
+                // Switch turns
+                this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
+                
+                if (this.gameMode === 'ai') {
+                    this.isPlayerTurn = this.currentPlayer === 'X';
+                    if (this.currentPlayer === 'O') {
+                        setTimeout(() => this.makeAIMove(), 800);
+                    }
+                } else {
+                    this.isPlayerTurn = true; // In multiplayer, both are "player turns"
+                }
+                
+                this.updateDisplay();
+            }
+            
+            makeAIMove() {
+                if (!this.gameActive || this.currentPlayer !== 'O') {
+                    console.log('AI move cancelled - game not active or not AI turn');
+                    return;
+                }
+                
+                const availableMoves = this.getAvailableMoves();
+                console.log('AI available moves:', availableMoves);
+                
+                if (availableMoves.length === 0) {
+                    console.log('No available moves for AI');
+                    return;
+                }
+                
+                let chosenMove;
+                
+                switch (this.aiDifficulty) {
+                    case 'easy':
+                        chosenMove = availableMoves[Math.floor(Math.random() * availableMoves.length)];
+                        break;
+                    case 'medium':
+                        chosenMove = this.getMediumAIMove(availableMoves);
+                        break;
+                    case 'hard':
+                        chosenMove = this.getHardAIMove(availableMoves);
+                        break;
+                    case 'impossible':
+                        chosenMove = this.getBestAIMove(availableMoves);
+                        break;
+                    default:
+                        chosenMove = availableMoves[Math.floor(Math.random() * availableMoves.length)];
+                }
+                
+                console.log('AI chose move:', chosenMove);
+                this.makeMove(chosenMove);
+            }
+            
+            getAvailableMoves() {
+                const available = [];
+                for (let i = 0; i < 9; i++) {
+                    if (this.board[i] === '') {
+                        available.push(i);
+                    }
+                }
+                return available;
+            }
+            
+            getMediumAIMove(availableMoves) {
+                if (Math.random() < 0.5) {
+                    return this.getBestAIMove(availableMoves);
+                }
+                return availableMoves[Math.floor(Math.random() * availableMoves.length)];
+            }
+            
+            getHardAIMove(availableMoves) {
+                if (Math.random() < 0.8) {
+                    return this.getBestAIMove(availableMoves);
+                }
+                return availableMoves[Math.floor(Math.random() * availableMoves.length)];
+            }
+            
+            getBestAIMove(availableMoves) {
+                // First, try to win
+                for (let move of availableMoves) {
+                    if (this.wouldWin(move, 'O')) {
+                        return move;
+                    }
+                }
+                
+                // Then, try to block opponent from winning
+                for (let move of availableMoves) {
+                    if (this.wouldWin(move, 'X')) {
+                        return move;
+                    }
+                }
+                
+                // Take center if available
+                if (availableMoves.includes(4)) {
+                    return 4;
+                }
+                
+                // Take corners
+                const corners = [0, 2, 6, 8];
+                const availableCorners = corners.filter(corner => availableMoves.includes(corner));
+                if (availableCorners.length > 0) {
+                    return availableCorners[Math.floor(Math.random() * availableCorners.length)];
+                }
+                
+                // Take any available move
+                return availableMoves[Math.floor(Math.random() * availableMoves.length)];
+            }
+            
+            wouldWin(moveIndex, player) {
+                // Create a test scenario
+                const testBoard = [...this.board];
+                const testPieces = { 
+                    X: [...this.playerPieces.X], 
+                    O: [...this.playerPieces.O] 
+                };
+                
+                // Handle 3-piece rule
+                if (testPieces[player].length >= 3) {
+                    const oldestIndex = testPieces[player].shift();
+                    testBoard[oldestIndex] = '';
+                }
+                
+                testBoard[moveIndex] = player;
+                testPieces[player].push(moveIndex);
+                
+                return this.checkWinnerOnBoard(testBoard) === player;
+            }
+            
+            checkWinner() {
+                return this.checkWinnerOnBoard(this.board);
+            }
+            
+            checkWinnerOnBoard(board) {
+                const winPatterns = [
+                    [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+                    [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+                    [0, 4, 8], [2, 4, 6] // diagonals
+                ];
+                
+                for (let pattern of winPatterns) {
+                    const [a, b, c] = pattern;
+                    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                        return board[a];
+                    }
+                }
+                
+                return null;
+            }
+            
+            endGame(result) {
+                console.log('Game ended with result:', result);
+                this.gameActive = false;
+                
+                if (result === 'draw') {
+                    this.score.draws++;
+                } else {
+                    this.score[result]++;
+                }
+                
+                this.updateDisplay();
+            }
+            
+            resetScore() {
+                this.score = { X: 0, O: 0, draws: 0 };
+                this.updateDisplay();
+            }
+            
+            updateBoard() {
+                const cells = document.querySelectorAll('.game-cell');
+                cells.forEach((cell, index) => {
+                    const value = this.board[index];
+                    cell.textContent = value;
+                    cell.className = 'game-cell';
+                    
+                    if (value) {
+                        cell.classList.add('occupied', value.toLowerCase());
+                    }
+                });
+            }
+            
+            updateDisplay() {
+                const turnIndicator = document.getElementById('turnIndicator');
+                const gameStatus = document.getElementById('gameStatus');
+                
+                if (!this.gameActive) {
+                    const winner = this.checkWinner();
+                    if (winner) {
+                        const winnerName = this.gameMode === 'ai' 
+                            ? (winner === 'X' ? 'YOU WIN!' : 'AI WINS!')
+                            : `Player ${winner} Wins!`;
+                        turnIndicator.textContent = winnerName;
+                        gameStatus.textContent = `Score - X: ${this.score.X} | O: ${this.score.O} | Draws: ${this.score.draws}`;
+                    } else {
+                        turnIndicator.textContent = 'Game Over';
+                        gameStatus.textContent = 'Click NEW GAME to start';
+                    }
+                } else {
+                    if (this.gameMode === 'ai') {
+                        if (this.currentPlayer === 'X') {
+                            turnIndicator.textContent = 'Your Turn (X)';
+                            gameStatus.textContent = 'Place your X on the board';
+                        } else {
+                            turnIndicator.textContent = 'AI Turn (O)';
+                            gameStatus.textContent = 'AI is thinking...';
+                        }
+                    } else {
+                        turnIndicator.textContent = `Player ${this.currentPlayer}'s Turn`;
+                        gameStatus.textContent = `Player ${this.currentPlayer}, make your move!`;
+                    }
+                }
+                
+                // Update piece counts
+                const xCount = this.playerPieces.X.length;
+                const oCount = this.playerPieces.O.length;
+                gameStatus.textContent += ` | Pieces: X:${xCount}/3, O:${oCount}/3`;
+            }
+            
+            updatePlayersList() {
+                const container = document.getElementById('playersContainer');
+                const peers = Object.values(this.room.peers);
+                
+                if (peers.length === 0) {
+                    container.innerHTML = '<div class="waiting-message">Connecting to Arsenal Network...</div>';
+                    return;
+                }
+                
+                container.innerHTML = '';
+                
+                peers.forEach((peer, index) => {
+                    const playerItem = document.createElement('div');
+                    playerItem.className = 'player-item';
+                    
+                    if (peer.id === this.room.clientId) {
+                        playerItem.classList.add('current-player');
+                    }
+                    
+                    let role = index === 0 ? 'Player X' : index === 1 ? 'Player O' : 'Spectator';
+                    
+                    playerItem.innerHTML = `
+                        <img src="${peer.avatarUrl}" alt="${peer.username}" class="player-avatar">
+                        <span class="player-name">${peer.username}</span>
+                        <span style="color: var(--text-muted); margin-left: auto;">${role}</span>
+                    `;
+                    
+                    container.appendChild(playerItem);
+                });
+                
+                // Update player info for multiplayer
+                if (peers.length >= 2) {
+                    document.getElementById('player1Avatar').src = peers[0].avatarUrl;
+                    document.getElementById('player1Name').textContent = peers[0].username;
+                    document.getElementById('player2Avatar').src = peers[1].avatarUrl;
+                    document.getElementById('player2Name').textContent = peers[1].username;
+                    
+                    // Determine if this is my turn in multiplayer
+                    const myIndex = peers.findIndex(p => p.id === this.room.clientId);
+                    this.mySymbol = myIndex === 0 ? 'X' : myIndex === 1 ? 'O' : null;
+                    this.isMyTurn = this.mySymbol === this.currentPlayer;
+                }
+            }
+            
+            createMatrixRain() {
+                const matrixContainer = document.querySelector('.matrix-rain');
+                const characters = '01XO◆◇▲▼';
+                
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => {
+                        const column = document.createElement('div');
+                        column.className = 'matrix-column';
+                        column.style.left = Math.random() * window.innerWidth + 'px';
+                        column.style.animationDuration = (Math.random() * 5 + 3) + 's';
+                        
+                        let text = '';
+                        for (let j = 0; j < 12; j++) {
+                            text += characters.charAt(Math.floor(Math.random() * characters.length)) + '<br>';
+                        }
+                        column.innerHTML = text;
+                        
+                        matrixContainer.appendChild(column);
+                        
+                        setTimeout(() => {
+                            if (column.parentNode) {
+                                column.parentNode.removeChild(column);
+                            }
+                        }, 8000);
+                    }, Math.random() * 3000);
+                }
+            }
+        }
+        
+        // Initialize the game when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Initializing Cyber Tic-Tac-Toe');
+            new CyberTicTacToe();
+        });
+    </script>
+</body>
+</html>

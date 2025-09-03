@@ -1,0 +1,674 @@
+/* Glitch Effects */
+.glitch {
+    position: relative;
+    display: inline-block;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.glitch::before {
+    animation: glitch-1 2s infinite;
+    color: var(--primary-color);
+    z-index: -1;
+}
+
+.glitch::after {
+    animation: glitch-2 2s infinite;
+    color: var(--secondary-color);
+    z-index: -2;
+}
+
+@keyframes glitch-1 {
+    0%, 90%, 100% {
+        transform: translate(0);
+        opacity: 0;
+    }
+    91%, 94% {
+        transform: translate(-1px, 1px);
+        opacity: 0.3;
+    }
+}
+
+@keyframes glitch-2 {
+    0%, 85%, 100% {
+        transform: translate(0);
+        opacity: 0;
+    }
+    86%, 89% {
+        transform: translate(1px, -1px);
+        opacity: 0.3;
+    }
+}
+
+/* Glitch Overlay */
+.glitch-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 98%, var(--primary-color) 100%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1000;
+    animation: glitch-overlay 12s infinite;
+}
+
+@keyframes glitch-overlay {
+    0%, 98%, 100% { opacity: 0; }
+    99% { opacity: 0.05; }
+}
+
+/* Matrix Rain Effect */
+.matrix-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.matrix-column {
+    position: absolute;
+    top: -100vh;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--primary-color);
+    opacity: 0.3;
+    animation: matrixFall linear infinite;
+    text-shadow: 0 0 5px var(--primary-color);
+}
+
+@keyframes matrixFall {
+    0% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.3;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+/* Advanced Particle System */
+.particle-system {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) scale(0.5) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Cursor Trail */
+.cursor-trail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+@keyframes trailFade {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.2);
+    }
+}
+
+/* Physics mode styles */
+.physics-active * {
+    pointer-events: none;
+}
+
+.physics-notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-color);
+    color: #000;
+    padding: 1rem 2rem;
+    font-family: 'Orbitron', monospace;
+    font-weight: bold;
+    border-radius: 5px;
+    z-index: 10000;
+    box-shadow: 0 0 20px var(--primary-color);
+    animation: notificationSlide 0.5s ease-out;
+}
+
+@keyframes notificationSlide {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Neural Network */
+.neural-network {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Shader Background */
+.shader-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    animation: shaderPulse 8s ease-in-out infinite;
+}
+
+@keyframes shaderPulse {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.05);
+    }
+}
+
+/* Enhanced cyberpunk scan lines */
+.cyber-scan {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        var(--primary-color) 50%, 
+        transparent 100%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+    animation: cyberScan 8s ease-in-out infinite;
+    box-shadow: 0 0 20px var(--primary-color);
+}
+
+@keyframes cyberScan {
+    0%, 90%, 100% {
+        opacity: 0;
+        transform: translateY(0) scaleX(0.1);
+    }
+    5% {
+        opacity: 0.8;
+        transform: scaleX(1);
+    }
+    85% {
+        opacity: 0.8;
+        transform: translateY(100vh) scaleX(1);
+    }
+}
+
+/* Subtle digital grid overlay */
+.digital-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+        radial-gradient(circle at 25% 25%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+    background-size: 50px 50px, 50px 50px, 200px 200px, 200px 200px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    animation: gridPulse 12s ease-in-out infinite;
+}
+
+@keyframes gridPulse {
+    0%, 90%, 100% { 
+        opacity: 0; 
+        transform: scale(1);
+    }
+    45%, 55% { 
+        opacity: 0.2; 
+        transform: scale(1.02);
+    }
+}
+
+/* Secret Hack Interface */
+.hack-interface {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.hack-interface.visible {
+    opacity: 1;
+}
+
+.hack-terminal {
+    width: 90%;
+    max-width: 800px;
+    height: 80%;
+    background: #000;
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 50px var(--primary-color);
+    animation: hackGlitch 0.1s infinite;
+}
+
+@keyframes hackGlitch {
+    0%, 90%, 100% { transform: translate(0); }
+    91% { transform: translate(-1px, 1px); }
+    92% { transform: translate(1px, -1px); }
+    93% { transform: translate(-1px, -1px); }
+    94% { transform: translate(1px, 1px); }
+}
+
+.hack-header {
+    background: var(--primary-color);
+    color: #000;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Orbitron', monospace;
+    font-weight: bold;
+}
+
+.hack-close {
+    background: none;
+    border: none;
+    color: #000;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.hack-content {
+    height: calc(100% - 120px);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.hack-log {
+    flex: 1;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.hack-line {
+    margin: 0.5rem 0;
+    opacity: 0;
+    animation: fadeInLine 0.5s ease forwards;
+}
+
+.hack-line.typing::after {
+    content: '_';
+    animation: blink 1s infinite;
+}
+
+@keyframes fadeInLine {
+    to { opacity: 1; }
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.puzzle-container {
+    background: #111;
+    border: 1px solid var(--primary-color);
+    padding: 1rem;
+    margin: 1rem 0;
+    min-height: 200px;
+    display: none;
+}
+
+.puzzle-container.active {
+    display: block;
+    animation: puzzleAppear 0.5s ease;
+}
+
+@keyframes puzzleAppear {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hack-input-container {
+    display: flex;
+    align-items: center;
+    background: #111;
+    padding: 0.5rem;
+    border: 1px solid var(--primary-color);
+}
+
+.prompt {
+    color: var(--secondary-color);
+    font-family: 'Space Mono', monospace;
+    margin-right: 0.5rem;
+}
+
+.hack-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    font-family: 'Space Mono', monospace;
+    outline: none;
+    font-size: 1rem;
+}
+
+.hack-progress {
+    background: #111;
+    padding: 1rem;
+    border-top: 1px solid var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 10px;
+    background: #333;
+    border: 1px solid var(--primary-color);
+    margin-right: 1rem;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+.progress-text {
+    font-family: 'Orbitron', monospace;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+.rewards-gallery {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 1000px;
+    height: 80%;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
+    padding: 2rem;
+    display: none;
+    overflow-y: auto;
+}
+
+.rewards-gallery.visible {
+    display: block;
+    animation: rewardsAppear 1s ease;
+}
+
+@keyframes rewardsAppear {
+    from { 
+        opacity: 0; 
+        transform: translate(-50%, -50%) scale(0.8); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) scale(1); 
+    }
+}
+
+.puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.puzzle-cell {
+    aspect-ratio: 1;
+    background: #222;
+    border: 2px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.puzzle-cell:hover {
+    background: var(--primary-color);
+    color: #000;
+}
+
+.puzzle-cell.active {
+    background: var(--secondary-color);
+    color: #000;
+}
+
+.cipher-input {
+    width: 100%;
+    background: #222;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-family: 'Space Mono', monospace;
+    padding: 1rem;
+    margin: 1rem 0;
+    outline: none;
+}
+
+.puzzle-hint {
+    color: var(--secondary-color);
+    font-style: italic;
+    margin: 0.5rem 0;
+}
+
+.reward-item {
+    background: #111;
+    border: 2px solid var(--accent-color);
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.reward-item h3 {
+    color: var(--accent-color);
+    font-family: 'Orbitron', monospace;
+    margin-bottom: 0.5rem;
+}
+
+.reward-item img,
+.reward-item video {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border: 1px solid var(--primary-color);
+    margin: 0.5rem 0;
+}
+
+.scrambled-word {
+    font-family: 'Orbitron', monospace;
+    font-size: 2rem;
+    color: var(--primary-color);
+    text-align: center;
+    padding: 2rem;
+    background: #222;
+    border: 2px solid var(--primary-color);
+    margin: 1rem 0;
+    letter-spacing: 0.5rem;
+    text-shadow: 0 0 10px var(--primary-color);
+}
+
+/* Shooting Gallery Styles */
+.shooting-mode {
+    user-select: none;
+}
+
+.crosshair {
+    filter: drop-shadow(0 0 5px var(--primary-color));
+}
+
+.crosshair svg {
+    animation: crosshairPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes crosshairPulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+.severely-damaged {
+    transition: all 0.5s ease-out !important;
+}
+
+.crack-effect {
+    animation: crackAppear 0.3s ease-out;
+}
+
+@keyframes crackAppear {
+    0% { 
+        opacity: 0;
+        transform: scale(0) rotate(var(--rotation, 0deg));
+    }
+    100% { 
+        opacity: 1;
+        transform: scale(1) rotate(var(--rotation, 0deg));
+    }
+}
+
+/* Mobile responsiveness for hack interface */
+@media (max-width: 768px) {
+    .hack-terminal {
+        width: 95%;
+        height: 90%;
+    }
+    
+    .hack-content {
+        padding: 0.5rem;
+    }
+    
+    .hack-log {
+        font-size: 0.8rem;
+    }
+    
+    .puzzle-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .puzzle-cell {
+        font-size: 1.2rem;
+    }
+    
+    .holographic-shape {
+        transform: scale(0.7);
+    }
+    
+    .neural-network canvas {
+        opacity: 0.2;
+    }
+    
+    .particle-system {
+        opacity: 0.6;
+    }
+}
+
+/* Performance optimizations for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .holographic-shape,
+    .floating-particle,
+    .neural-network,
+    .shader-background {
+        animation: none;
+    }
+    
+    .particle-system,
+    .cursor-trail {
+        display: none;
+    }
+    
+    .crosshair svg {
+        animation: none;
+    }
+    
+    .crack-effect {
+        animation: none;
+        opacity: 1;
+    }
+}
