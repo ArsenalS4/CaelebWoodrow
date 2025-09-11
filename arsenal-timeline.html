@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arsenal Studios Timeline — Caeleb Woodrow (Architecture, Professional)</title>
+    <meta name="description" content="Project timeline for the Arsenal Studios architectural design by Caeleb Woodrow, detailing key milestones like case studies and schematics.">
+    <meta name="keywords" content="Caeleb Woodrow, Arsenal Studios, architecture, project timeline, professional design, case studies, schematics">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/effects.css">
+    <link rel="stylesheet" href="styles/timeline.css">
+    <link rel="icon" type="image/png" href="LogoGT.png">
+</head>
+<body>
+    <div class="glitch-overlay"></div>
+    <div class="matrix-rain"></div>
+    
+    <a href="/" class="back-link">← BACK TO PORTFOLIO</a>
+
+    <div class="timeline-container">
+        <header class="timeline-header">
+            <img src="Logoupscaled.png" alt="Arsenal Studios Logo" class="header-logo">
+            <h1 class="glitch" data-text="PROJECT TIMELINE">PROJECT TIMELINE</h1>
+            <p>Tracking the architectural development of Arsenal Studios.</p>
+        </header>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">September 3rd 2025</div>
+                <div class="timeline-content">
+                    <a href="arsenal-slideshow.html" class="timeline-link">
+                        <h2>Case Studies</h2>
+                        <p>Visual exploration of the architectural concepts, including workspace, gallery, outdoor, and living quarters.</p>
+                        <span>View Studies →</span>
+                    </a>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">September 11th 2025</div>
+                <div class="timeline-content">
+                    <a href="schematics.html" class="timeline-link">
+                        <h2>Schematics 1</h2>
+                        <p>Initial area programming and spatial allocation for the ground floor and second floor structures.</p>
+                        <span>View Schematics →</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/effects.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const effects = window.effects;
+            if (effects && effects.initializeEffects) {
+                effects.initializeEffects();
+            } else {
+                // Fallback for modular effects
+                import('./js/effects-core.js').then(core => {
+                    core.createMatrixRain();
+                });
+                import('./js/effects-advanced.js').then(adv => {
+                    adv.createTextMorphing();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+

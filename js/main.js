@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         arsenalStudios.addEventListener('click', function(e) {
             // Don't trigger if clicking on button
             if (!e.target.classList.contains('portfolio-btn')) {
-                window.location.href = 'arsenal-slideshow.html';
+                window.location.href = 'arsenal-timeline.html';
             }
         });
     }
