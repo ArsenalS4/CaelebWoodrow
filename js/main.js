@@ -6,6 +6,9 @@ import { initializeCookies } from './cookies.js';
 import { initializeGamesPage } from './games.js';
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize EmailJS
+    emailjs.init("YOUR_PUBLIC_KEY"); // You'll need to replace this with your actual EmailJS public key
+    
     // Initialize all modules
     initializeEffects();
     initializeAnimations();
@@ -50,13 +53,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Contact form handler
+    // Contact form handler with EmailJS
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-            contactForm.reset();
+            
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            
+            // Show loading state
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            submitBtn.disabled = true;
+            
+            // Send email using EmailJS
+            emailjs.sendForm('service_id', 'template_id', contactForm)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert('Thank you for your message! I will get back to you soon.');
+                    contactForm.reset();
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('Sorry, there was an error sending your message. Please try again or contact me directly at caelebwoodrow@gmail.com');
+                })
+                .finally(function() {
+                    // Reset button state
+                    btnText.style.display = 'inline';
+                    btnLoading.style.display = 'none';
+                    submitBtn.disabled = false;
+                });
         });
     }
 

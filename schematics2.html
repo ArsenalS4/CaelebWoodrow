@@ -1,0 +1,123 @@
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schematics 2 — Arsenal Studios by Caeleb Woodrow</title>
+    <meta name="description" content="Revised architectural schematics and area programming for Arsenal Studios, designed by Caeleb Woodrow.">
+    <meta name="keywords" content="Caeleb Woodrow, Arsenal Studios, architecture, schematics, area program, professional design">
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/effects.css">
+    <link rel="stylesheet" href="styles/schematics.css">
+    <link rel="icon" type="image/png" href="LogoGT.png">
+</head>
+<body>
+    <div class="glitch-overlay"></div>
+    <div class="matrix-rain"></div>
+
+    <a href="arsenal-timeline.html" class="back-link">← BACK TO TIMELINE</a>
+
+    <div class="schematics-container">
+        <header class="schematics-header">
+            <h1>Schematics 2: Final Area Program</h1>
+            <p>Total Final Area: <strong>4,000 sq ft</strong></p>
+        </header>
+
+        <main class="program-content">
+            <section class="floor-plan-section">
+                <h2 class="section-title">Floor Plan Overview</h2>
+                <div class="floor-plan-container">
+                    <div class="plan-image">
+                        <img src="Schematics2withtext.png" alt="Building Floor Plan with Updated Labels" class="floor-plan-img" onclick="openFloorplanModal()">
+                        <p class="plan-caption">Updated Floor Plan with Room Labels (Click to view fullscreen)</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="program-grid">
+                <div class="floor-plan">
+                    <h2 class="floor-title">First Floor (Unchanged)</h2>
+                    <p class="floor-total">Total: <strong>2,650 sq ft</strong></p>
+                    <p class="floor-description">This floor plan is locked and remains dedicated to the public-facing gallery and technical production.</p>
+
+                    <ul class="area-list">
+                        <li><span>Gallery:</span> <strong>1,000 sq ft</strong></li>
+                        <li><span>Motion Capture (MoCap) Room:</span> <strong>500 sq ft</strong></li>
+                        <li><span>Development Room:</span> <strong>400 sq ft</strong></li>
+                        <li><span>Meeting Room:</span> <strong>150 sq ft</strong></li>
+                        <li><span>Break Room:</span> <strong>130 sq ft</strong></li>
+                        <li><span>Sound Studio:</span> <strong>100 sq ft</strong></li>
+                        <li><span>Storage / Data Room:</span> <strong>80 sq ft</strong></li>
+                        <li><span>Public Restroom:</span> <strong>80 sq ft</strong></li>
+                        <li><span>Circulation (Stairs & Walkway):</span> <strong>210 sq ft</strong></li>
+                    </ul>
+                </div>
+
+                <div class="floor-plan">
+                    <h2 class="floor-title">Second Floor (Revised)</h2>
+                    <p class="floor-total">Total: <strong>1,350 sq ft</strong></p>
+                    <p class="floor-description">This floor is adjusted to create a significantly larger residential area by reallocating space from the private studio/classroom.</p>
+
+                    <ul class="area-list">
+                        <li><span>Open Living Space:</span> <strong>700 sq ft</strong></li>
+                        <li><span>Class Room / Owner's Studio:</span> <strong>400 sq ft</strong></li>
+                        <li><span>Restroom:</span> <strong>100 sq ft</strong></li>
+                        <li><span>Circulation (Hallway overlooking Gallery):</span> <strong>150 sq ft</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="calculation-summary">
+                <h2 class="section-title">Final Calculation</h2>
+                <ul class="calculation-list">
+                    <li><span>First Floor:</span> <strong>2,650 sq ft</strong></li>
+                    <li><span>Second Floor:</span> <strong>1,350 sq ft</strong></li>
+                    <li class="total-line"><span>Total Enclosed Area:</span> <strong>4,000 sq ft</strong></li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <!-- Fullscreen Modal -->
+    <div id="floorplan-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeFloorplanModal()">&times;</span>
+            <img src="Schematics2withtext.png" alt="Building Floor Plan with Updated Labels" class="modal-image">
+        </div>
+    </div>
+
+    <script type="module">
+        import { createMatrixRain } from './js/effects-core.js';
+        createMatrixRain();
+
+        // Fullscreen modal functionality
+        window.openFloorplanModal = function() {
+            document.getElementById('floorplan-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        window.closeFloorplanModal = function() {
+            document.getElementById('floorplan-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside the image
+        document.getElementById('floorplan-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeFloorplanModal();
+            }
+        });
+
+        // Close modal with escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeFloorplanModal();
+            }
+        });
+    </script>
+</body>
+</html>

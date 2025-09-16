@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caeleb Woodrow — Professional Architecture & Design Portfolio</title>
+    
+    <meta name="description" content="Explore the professional architecture and design portfolio of Caeleb Woodrow. Specializing in innovative architectural solutions, workspace design, and immersive environments.">
+    <meta name="keywords" content="Caeleb, Caeleb Woodrow, Architecture, architectural design, professional architect, workspace design, architectural solutions, entertainment venues">
+    <meta name="author" content="Caeleb Woodrow">
+    <meta name="theme-color" content="#2563eb">
+    <link rel="canonical" href="https://arsenalstudios.dev/">
+    
+    <!-- Structured data for SEO -->
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"ProfessionalService","name":"Caeleb Woodrow Architectural Design","image":"https://arsenalstudios.dev/portrait.jpg","url":"https://arsenalstudios.dev/","telephone":"803-305-5217","priceRange":"$$","address":{"@type":"PostalAddress","addressLocality":"Columbia","addressRegion":"SC","addressCountry":"US"},"description":"Professional architectural designer specializing in architecture, workspace planning, entertainment venues, and immersive environments.","founder":{"@type":"Person","name":"Caeleb Woodrow","jobTitle":"Architectural Designer"}}
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cal+Sans:wght@400;600&family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/portfolio.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="icon" type="image/png" href="LogoGT.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="CWLOGO.png" alt="CW logo" class="cw-logo">
+                <span class="logo-text">Caeleb Woodrow</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line">Caeleb</span>
+                    <span class="title-line">Woodrow</span>
+                </h1>
+                <p class="hero-subtitle">Architecture & Professional Design</p>
+                <p class="hero-description">
+                    Specializing in innovative architecture, workspace design, and immersive environments
+                    that push the boundaries of creative and functional possibilities.
+                </p>
+                <div class="hero-actions">
+                    <a href="#portfolio" class="btn btn-primary">View My Architecture</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="geometric-pattern"></div>
+                <div class="hero-portrait-wrap" aria-hidden="false">
+                    <img src="portrait.jpg" alt="Caeleb Woodrow, a professional in architecture and design" class="hero-portrait">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About My Architectural Philosophy</h2>
+                <p class="section-subtitle">A Passion for Creative & Functional Architecture</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>As a professional architectural designer, I specialize in innovative workspace design, entertainment venues, and immersive environments that push the boundaries of possibility. My approach to architecture blends aesthetic vision with practical functionality.</p>
+                    <p>With a focus on cutting-edge game development studios and entertainment spaces, I bring together architectural expertise with an understanding of interactive media to create spaces that inspire creativity, collaboration, and engagement. Every project is an opportunity to craft unique architectural solutions.</p>
+                    <div class="skills">
+                        <div class="skill-item">Architectural Design</div>
+                        <div class="skill-item">Workspace Architecture</div>
+                        <div class="skill-item">Entertainment Venues</div>
+                        <div class="skill-item">Game Development Studios</div>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat">
+                        <span class="stat-number">4</span>
+                        <span class="stat-label">Projects Completed</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">2</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Architectural Portfolio</h2>
+                <p class="section-subtitle">Featured work and case studies in architecture</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item featured" id="arsenalStudios">
+                    <div class="portfolio-image">
+                        <img src="Logoupscaled.png" alt="Architectural design study for Arsenal Game Studios">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <h3 class="portfolio-title">Arsenal Game Studios</h3>
+                                <p class="portfolio-description">Comprehensive architectural study featuring workspace design, public galleries, outdoor recreational areas, and private living quarters for a cutting-edge game development studio.</p>
+                                <div class="portfolio-tags">
+                                    <span class="tag">Architecture</span>
+                                    <span class="tag">Workspace Design</span>
+                                    <span class="tag">Entertainment</span>
+                                    <span class="tag">Mixed-Use Architecture</span>
+                                </div>
+                                <button class="btn btn-primary portfolio-btn" onclick="window.location.href='arsenal-timeline.html'">View Project Timeline</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contact</h2>
+                <p class="section-subtitle">Let's discuss your next architecture project</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h4>Email</h4>
+                        <p>caelebwoodrow@gmail.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>Phone</h4>
+                        <p>8033055217</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>Location</h4>
+                        <p>Columbia SC</p>
+                    </div>
+                </div>
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <input type="text" name="from_name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="from_email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="btn-text">Send Message</span>
+                        <span class="btn-loading" style="display: none;">Sending...</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Caeleb Woodrow. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById('contact-form');
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const btn = form.querySelector('button[type="submit"]');
+            
+            btn.querySelector('.btn-text').style.display = 'none';
+            btn.querySelector('.btn-loading').style.display = 'inline-block';
+            
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formData)
+                .then((response) => {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert('Message sent successfully!');
+                    form.reset();
+                    btn.querySelector('.btn-text').style.display = 'inline-block';
+                    btn.querySelector('.btn-loading').style.display = 'none';
+                })
+                .catch((err) => {
+                    console.log('FAILED...', err);
+                    alert('Error sending message. Please try again later.');
+                    btn.querySelector('.btn-text').style.display = 'inline-block';
+                    btn.querySelector('.btn-loading').style.display = 'none';
+                });
+        });
+    </script>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
