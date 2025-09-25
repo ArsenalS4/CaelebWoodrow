@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+    <title>Schematics 3 — Arsenal Studios Technical Drawings | Caeleb Woodrow Architecture</title>
+    <meta name=\"description\" content=\"Technical architectural drawings for Arsenal Studios showing the professional transition from Photoshop concepts to Revit documentation by Caeleb Woodrow.\">
+    <meta name=\"keywords\" content=\"Caeleb Woodrow, Arsenal Studios, Revit, architectural drawings, technical schematics, Photoshop to Revit transition, professional architecture\">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/effects.css">
+    <link rel="stylesheet" href="styles/schematics.css">
+    <link rel="icon" type="image/png" href="LogoGT.png">
+</head>
+<body>
+    <div class="glitch-overlay"></div>
+    <div class="matrix-rain"></div>
+    
+    <a href="arsenal-timeline.html" class="back-link">← BACK TO TIMELINE</a>
+
+    <div class="schematics-container">
+        <header class="schematics-header">
+            <h1 class="glitch" data-text="SCHEMATICS 3">SCHEMATICS 3</h1>
+            <p class="subtitle">Technical Transition: Photoshop to Revit</p>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="transition-explanation">
+                <h2>Design Evolution</h2>
+                <p>These technical drawings represent a crucial milestone in the Arsenal Studios project development: the transition from conceptual Photoshop-based design exploration to professional-grade Revit architectural documentation.</p>
+                
+                <div class="transition-details">
+                    <div class="phase-card">
+                        <h3>Phase 1: Conceptual Design (Photoshop)</h3>
+                        <p>Initial spatial concepts, visual mockups, and design ideation were developed using Photoshop, allowing for rapid visualization and creative exploration of the studio's architectural potential.</p>
+                    </div>
+                    
+                    <div class="phase-card">
+                        <h3>Phase 2: Technical Documentation (Revit)</h3>
+                        <p>Translation of creative concepts into precise architectural drawings using Revit, establishing accurate dimensions, structural elements, and technical specifications required for professional construction documentation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawings-section">
+                <h2>Technical Drawings</h2>
+                <div class="pdf-container">
+                    <div class="pdf-item">
+                        <h3>Floor One - First Floor Technical</h3>
+                        <div class="pdf-wrapper">
+                            <img src="ArsenalF1.png" alt="Floor One First Floor Technical Drawing" class="technical-drawing" style="width: 100%; height: auto; border: 1px solid #333; cursor: pointer;">
+                            <p class="pdf-fallback">
+                                Click image to view full size
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="pdf-item">
+                        <h3>Floor Two - Second Floor Technical</h3>
+                        <div class="pdf-wrapper">
+                            <img src="ArsenalF2.png" alt="Floor Two Second Floor Technical Drawing" class="technical-drawing" style="width: 100%; height: auto; border: 1px solid #333; cursor: pointer;">
+                            <p class="pdf-fallback">
+                                Click image to view full size
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technical-notes">
+                <h2>Technical Specifications</h2>
+                <div class="spec-grid">
+                    <div class="spec-item">
+                        <h4>Software Transition</h4>
+                        <p>From Adobe Photoshop creative exploration to Autodesk Revit professional documentation</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Drawing Standards</h4>
+                        <p>Adherence to architectural drafting conventions and building code requirements</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Precision Level</h4>
+                        <p>Construction-ready technical drawings with accurate dimensions and specifications</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for fullscreen images -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <img class="modal-image" id="modalImg">
+        </div>
+    </div>
+
+    <script type="module" src="js/effects.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const effects = window.effects;
+            if (effects && effects.initializeEffects) {
+                effects.initializeEffects();
+            } else {
+                import('./js/effects-core.js').then(core => {
+                    core.createMatrixRain();
+                });
+                import('./js/effects-advanced.js').then(adv => {
+                    adv.createTextMorphing();
+                });
+            }
+
+            // Modal functionality
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            const technicalDrawings = document.querySelectorAll('.technical-drawing');
+            const closeBtn = document.getElementsByClassName('close')[0];
+
+            technicalDrawings.forEach(img => {
+                img.addEventListener('click', function() {
+                    modal.style.display = 'block';
+                    modalImg.src = this.src;
+                });
+            });
+
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

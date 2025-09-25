@@ -6,8 +6,8 @@ import { initializeCookies } from './cookies.js';
 import { initializeGamesPage } from './games.js';
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize EmailJS
-    emailjs.init("YOUR_PUBLIC_KEY"); // You'll need to replace this with your actual EmailJS public key
+    // Initialize EmailJS with public key
+    emailjs.init("m8Wkc-EviBGjvQF9H"); // Replace with your actual public key
     
     // Initialize all modules
     initializeEffects();
@@ -64,12 +64,22 @@ document.addEventListener('DOMContentLoaded', function() {
             const btnLoading = submitBtn.querySelector('.btn-loading');
             
             // Show loading state
-            btnText.style.display = 'none';
-            btnLoading.style.display = 'inline';
+            if (btnText && btnLoading) {
+                btnText.style.display = 'none';
+                btnLoading.style.display = 'inline';
+            }
             submitBtn.disabled = true;
             
+            // Prepare template parameters
+            const templateParams = {
+                from_name: contactForm.querySelector('input[name="from_name"]').value,
+                from_email: contactForm.querySelector('input[name="from_email"]').value,
+                message: contactForm.querySelector('textarea[name="message"]').value,
+                to_email: 'caelebwoodrow@gmail.com'
+            };
+            
             // Send email using EmailJS
-            emailjs.sendForm('service_id', 'template_id', contactForm)
+            emailjs.send('service_2vw6vml', 'template_portfolio', templateParams)
                 .then(function(response) {
                     console.log('SUCCESS!', response.status, response.text);
                     alert('Thank you for your message! I will get back to you soon.');
@@ -80,8 +90,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 .finally(function() {
                     // Reset button state
-                    btnText.style.display = 'inline';
-                    btnLoading.style.display = 'none';
+                    if (btnText && btnLoading) {
+                        btnText.style.display = 'inline';
+                        btnLoading.style.display = 'none';
+                    }
                     submitBtn.disabled = false;
                 });
         });
