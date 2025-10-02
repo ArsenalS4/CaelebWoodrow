@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Development — Arsenal Studios | Caeleb Woodrow Architecture</title>
+    <meta name="description" content="Design development phase for Arsenal Studios showing refined architectural floor plans with enhanced spatial organization by Caeleb Woodrow.">
+    <meta name="keywords" content="Caeleb Woodrow, Arsenal Studios, design development, architectural refinement, floor plans, professional architecture">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/effects.css">
+    <link rel="stylesheet" href="styles/schematics.css">
+    <link rel="icon" type="image/png" href="LogoGT.png">
+</head>
+<body>
+    <div class="glitch-overlay"></div>
+    <div class="matrix-rain"></div>
+    
+    <a href="arsenal-timeline.html" class="back-link">← BACK TO TIMELINE</a>
+
+    <div class="schematics-container">
+        <header class="schematics-header">
+            <h1 class="glitch" data-text="DESIGN DEVELOPMENT">DESIGN DEVELOPMENT</h1>
+            <p class="subtitle">Refined Architectural Plans</p>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="transition-explanation">
+                <h2>Development Phase</h2>
+                <p>These revised floor plans represent the design development phase of Arsenal Studios, incorporating feedback and refinements to optimize spatial relationships, circulation patterns, and functional zoning. This iteration demonstrates the evolution of the design toward construction-ready documentation.</p>
+                
+                <div class="transition-details">
+                    <div class="phase-card">
+                        <h3>Spatial Refinement</h3>
+                        <p>Enhanced spatial organization with improved circulation flow, optimized room proportions, and refined adjacencies between programmatic elements to support both public gallery functions and private creative spaces.</p>
+                    </div>
+                    
+                    <div class="phase-card">
+                        <h3>Technical Precision</h3>
+                        <p>Increased level of detail in architectural documentation, including precise dimensioning, structural coordination, and specification of building systems to support the next phase of development.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawings-section">
+                <h2>Revised Floor Plans</h2>
+                <div class="pdf-container">
+                    <div class="pdf-item">
+                        <h3>First Floor - Revised Plan</h3>
+                        <div class="pdf-wrapper">
+                            <img src="RevisedF1.png" alt="First Floor Revised Plan" class="technical-drawing" style="width: 100%; height: auto; border: 1px solid #333; cursor: pointer;">
+                            <p class="pdf-fallback">
+                                Click image to view full size
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="pdf-item">
+                        <h3>Second Floor - Revised Plan</h3>
+                        <div class="pdf-wrapper">
+                            <img src="RevisedF2.png" alt="Second Floor Revised Plan" class="technical-drawing" style="width: 100%; height: auto; border: 1px solid #333; cursor: pointer;">
+                            <p class="pdf-fallback">
+                                Click image to view full size
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="technical-notes">
+                <h2>Development Highlights</h2>
+                <div class="spec-grid">
+                    <div class="spec-item">
+                        <h4>Enhanced Layout</h4>
+                        <p>Optimized room arrangements and improved spatial flow throughout both levels</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Detailed Documentation</h4>
+                        <p>Comprehensive architectural detailing with construction-ready specifications</p>
+                    </div>
+                    <div class="spec-item">
+                        <h4>Design Integration</h4>
+                        <p>Coordinated systems and refined relationships between programmatic elements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for fullscreen images -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <img class="modal-image" id="modalImg">
+        </div>
+    </div>
+
+    <script type="module" src="js/effects.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const effects = window.effects;
+            if (effects && effects.initializeEffects) {
+                effects.initializeEffects();
+            } else {
+                import('./js/effects-core.js').then(core => {
+                    core.createMatrixRain();
+                });
+                import('./js/effects-advanced.js').then(adv => {
+                    adv.createTextMorphing();
+                });
+            }
+
+            // Modal functionality
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            const technicalDrawings = document.querySelectorAll('.technical-drawing');
+            const closeBtn = document.getElementsByClassName('close')[0];
+
+            technicalDrawings.forEach(img => {
+                img.addEventListener('click', function() {
+                    modal.style.display = 'block';
+                    modalImg.src = this.src;
+                });
+            });
+
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
